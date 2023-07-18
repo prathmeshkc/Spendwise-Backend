@@ -19,4 +19,10 @@ public interface TransactionRepository extends MongoRepository<Transaction, Stri
     @Query("{'user.userId': ?0, 'transactionDate': { $gte: ?1, $lte: ?2 }}")
     List<Transaction> findAllByUserIdAndTransactionDateBetween(String userId, LocalDate startDate, LocalDate endDate);
 
+    @Query("{'user.userId': ?0, $or: [{'title': {$regex: '?1', $options: 'i'}}, {'note': {$regex: '?1', $options: 'i'}}]}")
+    List<Transaction> searchByUserIdAndText(String userId, String searchText);
+
+    @Query("{'user.userId': ?0, 'transactionType': ?1, $or: [{'title': {$regex: '?2', $options: 'i'}}, {'note': {$regex: '?2', $options: 'i'}}]}")
+    List<Transaction> searchByUserIdAndTypeAndText(String userId, String transactionType, String searchText);
+
 }

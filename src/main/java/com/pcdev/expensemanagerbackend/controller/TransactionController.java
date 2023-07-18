@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -31,6 +32,7 @@ public class TransactionController {
             HttpServletRequest mutableHttpServletRequest,
             @RequestBody TransactionRequest transactionRequest
     ) {
+        System.out.println("Inside createTransaction");
         try {
             String userId = mutableHttpServletRequest.getHeader("userId");
             TransactionResponse transactionResponse = transactionService.createTransaction(
@@ -54,6 +56,7 @@ public class TransactionController {
 
     @GetMapping("/")
     public ResponseEntity<?> getAllTransaction(HttpServletRequest mutableHttpServletRequest) {
+        System.out.println("Inside getAllTransaction");
 
         try {
             String userId = mutableHttpServletRequest.getHeader("userId");
@@ -73,6 +76,8 @@ public class TransactionController {
             HttpServletRequest mutableHttpServletRequest,
             @PathVariable String transactionId
     ) {
+        System.out.println("Inside getTransactionById");
+
         try {
 
             String userId = mutableHttpServletRequest.getHeader("userId");
@@ -93,6 +98,8 @@ public class TransactionController {
             @RequestParam("startDate") @DateTimeFormat(pattern = "MMM dd, yyyy") String startDate,
             @RequestParam("endDate") @DateTimeFormat(pattern = "MMM dd, yyyy") String endDate
     ) {
+        System.out.println("Inside getAllTransactionBetweenDates");
+
         try {
             String userId = mutableHttpServletRequest.getHeader("userId");
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy");
@@ -106,11 +113,68 @@ public class TransactionController {
             );
 
             return ResponseEntity.ok(transactionResponses);
-        } catch (NotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new MessageBody(e.getMessage()));
+        } catch (BadRequestException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageBody(e.getMessage()));
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new MessageBody("Something went wrong in fetching transaction between dates!"));
+        }
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<?> searchTransactionsByText(
+            HttpServletRequest mutableHttpServletRequest,
+            @RequestParam(name = "searchQuery") String searchText
+    ) {
+        System.out.println("Inside searchTransactionsByText");
+
+        try {
+            String userId = mutableHttpServletRequest.getHeader("userId");
+            if (searchText == null || searchText.isEmpty()) {
+                return ResponseEntity.ok(new ArrayList<TransactionResponse>());
+            }
+            List<TransactionResponse> transactionResponses = transactionService.searchByText(userId, searchText);
+            return ResponseEntity.ok(transactionResponses);
+        } catch (BadRequestException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageBody(e.getMessage()));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new MessageBody("Something went wrong in searching transactions by text!"));
+        }
+    }
+
+    @GetMapping("/search/type")
+    public ResponseEntity<?> searchTransactionByTypeAndText(
+            HttpServletRequest mutableHttpServletRequest,
+            @RequestParam(name = "searchQuery") String searchText,
+            @RequestParam(name = "type") String transactionType
+    ) {
+        System.out.println("Inside searchTransactionByTypeAndText");
+
+        try {
+            String userId = mutableHttpServletRequest.getHeader("userId");
+
+            if (transactionType == null || transactionType.isEmpty()) {
+                return ResponseEntity.badRequest().body(new MessageBody("Specify Transaction Type!"));
+            }
+
+            if (searchText == null || searchText.isEmpty()) {
+                return ResponseEntity.ok(new ArrayList<TransactionResponse>());
+            }
+
+            if (transactionType.equalsIgnoreCase("INCOME")) {
+                transactionType = "INCOME";
+            } else {
+                transactionType = "EXPENSE";
+            }
+
+            List<TransactionResponse> transactionResponses = transactionService.searchByTypeAndText(userId, transactionType, searchText);
+            return ResponseEntity.ok(transactionResponses);
+        } catch (BadRequestException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new MessageBody(e.getMessage()));
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new MessageBody("Something went wrong in searching transactions by text and type!"));
         }
     }
 
@@ -120,6 +184,8 @@ public class TransactionController {
             @PathVariable("transactionId") String transactionId,
             @RequestBody TransactionRequest transactionRequest
     ) {
+        System.out.println("Inside updateTransaction");
+
         try {
             String userId = mutableHttpServletRequest.getHeader("userId");
 
@@ -153,6 +219,8 @@ public class TransactionController {
             HttpServletRequest mutableHttpServletRequest,
             @PathVariable("transactionId") String transactionId
     ) {
+        System.out.println("Inside deleteTransaction");
+
         try {
             String userId = mutableHttpServletRequest.getHeader("userId");
             Object transactionResponse = transactionService.deleteTransaction(

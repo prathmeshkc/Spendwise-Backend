@@ -1,5 +1,6 @@
 package com.pcdev.expensemanagerbackend.service.transaction;
 
+import com.google.rpc.Help;
 import com.pcdev.expensemanagerbackend.model.User.User;
 import com.pcdev.expensemanagerbackend.model.auth.MessageBody;
 import com.pcdev.expensemanagerbackend.model.transaction.Transaction;
@@ -112,6 +113,31 @@ public class TransactionService {
                 userId, startDate, endDate);
 
         return Helper.getTransactionResponses(transactionsBetweenDates);
+    }
+
+    public List<TransactionResponse> searchByText(
+            String userId,
+            String searchText
+    ) {
+        if (userId == null) {
+            throw new BadRequestException("User Not Found!");
+        }
+
+        List<Transaction> foundTransactions = transactionRepository.searchByUserIdAndText(userId, searchText);
+        return Helper.getTransactionResponses(foundTransactions);
+    }
+
+    public List<TransactionResponse> searchByTypeAndText(
+            String userId,
+            String transactionType,
+            String searchText
+    ) {
+        if (userId == null) {
+            throw new BadRequestException("User Not Found!");
+        }
+
+        List<Transaction> foundTransactions = transactionRepository.searchByUserIdAndTypeAndText(userId, transactionType, searchText);
+        return Helper.getTransactionResponses(foundTransactions);
     }
 
     public Object updateTransaction(
