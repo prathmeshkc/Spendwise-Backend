@@ -20,7 +20,7 @@ public class Helper {
                 transaction.getAmount(),
                 transaction.getTransactionType(),
                 transaction.getCategory(),
-                formatter.format(LocalDate.from(transaction.getTransactionDate().toInstant().atZone(ZoneId.systemDefault()))),
+                formatter.format(LocalDate.from(transaction.getTransactionDate().toInstant().atZone(ZoneId.of("UTC")))),
                 transaction.getNote()
         )).toList();
     }
@@ -35,7 +35,7 @@ public class Helper {
                 .amount(transaction.getAmount())
                 .transactionType(transaction.getTransactionType())
                 .category(transaction.getCategory())
-                .transactionDate(formatter.format(LocalDate.from(transaction.getTransactionDate().toInstant().atZone(ZoneId.systemDefault()))))
+                .transactionDate(formatter.format(LocalDate.from(transaction.getTransactionDate().toInstant().atZone(ZoneId.of("UTC")))))
                 .note(transaction.getNote())
                 .build();
     }

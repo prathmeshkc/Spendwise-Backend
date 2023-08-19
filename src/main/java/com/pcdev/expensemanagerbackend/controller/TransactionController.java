@@ -40,7 +40,7 @@ public class TransactionController {
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy", Locale.ENGLISH);
             LocalDate localDate = LocalDate.parse(transactionRequest.getTransactionDate(), formatter);
-            Date date = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            Date date = Date.from(localDate.atStartOfDay(ZoneId.of("UTC")).toInstant());
 
             TransactionResponse transactionResponse = transactionService.createTransaction(
                     userId,
@@ -112,8 +112,8 @@ public class TransactionController {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy", Locale.ENGLISH);
             LocalDate startlocalDate = LocalDate.parse(stringStartDate, formatter);
             LocalDate endlocalDate = LocalDate.parse(stringEndDate, formatter);
-            Date startDate = Date.from(startlocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-            Date endDate = Date.from(endlocalDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            Date startDate = Date.from(startlocalDate.atStartOfDay(ZoneId.of("UTC")).toInstant());
+            Date endDate = Date.from(endlocalDate.atStartOfDay(ZoneId.of("UTC")).toInstant());
 
             System.out.println("StartDate: " + startDate);
             System.out.println("EndDate: " + endDate);
@@ -258,8 +258,6 @@ public class TransactionController {
             return ResponseEntity.internalServerError().body(new MessageBody(e.getMessage()));
         }
     }
-
-
 
 
 }
