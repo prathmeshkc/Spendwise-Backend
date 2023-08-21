@@ -83,7 +83,6 @@ public class TransactionService {
         }
 
         List<Transaction> transactions = transactionRepository.findAllByUserId(userId);
-        Collections.reverse(transactions);
         return Helper.getTransactionResponses(transactions);
     }
 
