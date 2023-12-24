@@ -1,82 +1,92 @@
-# ExpenseManagerBackend serverless API
-The ExpenseManagerBackend project, created with [`aws-serverless-java-container`](https://github.com/awslabs/aws-serverless-java-container).
 
-The starter project defines a simple `/ping` resource that can accept `GET` requests with its tests.
+![Spendwise Banner](https://res.cloudinary.com/prathmeshc/image/upload/v1697498371/Feature_Graphic_Image_fyjuun.png)
 
-The project folder also includes a `template.yml` file. You can use this [SAM](https://github.com/awslabs/serverless-application-model) file to deploy the project to AWS Lambda and Amazon API Gateway or test in local with the [SAM CLI](https://github.com/awslabs/aws-sam-cli). 
 
-## Pre-requisites
-* [AWS CLI](https://aws.amazon.com/cli/)
-* [SAM CLI](https://github.com/awslabs/aws-sam-cli)
-* [Gradle](https://gradle.org/) or [Maven](https://maven.apache.org/)
+# Spendwise - Track Expenses
 
-## Building the project
-You can use the SAM CLI to quickly build the project
-```bash
-$ mvn archetype:generate -DartifactId=ExpenseManagerBackend -DarchetypeGroupId=com.amazonaws.serverless.archetypes -DarchetypeArtifactId=aws-serverless-jersey-archetype -DarchetypeVersion=2.0.0-M1 -DgroupId=com.pcdev -Dversion=1.0-SNAPSHOT -Dinteractive=false
-$ cd ExpenseManagerBackend
-$ sam build
-Building resource 'ExpenseManagerBackendFunction'
-Running JavaGradleWorkflow:GradleBuild
-Running JavaGradleWorkflow:CopyArtifacts
+Spendwise - Expense Tracker Android App for Budget Management and Financial Tracking
 
-Build Succeeded
+Take control of your finances with Spendwise, an intuitive expense tracker Android app. This powerful tool lets you effortlessly record your income and expenses, providing a complete overview of your financial situation. Set a budget and monitor your spending in different categories to ensure that you're staying on track. The app also offers a pie chart visualization, allowing you to easily identify where you're spending the most. Additionally, Spendwise allows you to generate and download statements of your income and expense records, making it simple to analyze your financial habits and make informed decisions. With Spendwise, managing your budget has never been easier.
 
-Built Artifacts  : .aws-sam/build
-Built Template   : .aws-sam/build/template.yaml
+**You can download the app from Playstore 🚀**
 
-Commands you can use next
-=========================
-[*] Invoke Function: sam local invoke
-[*] Deploy: sam deploy --guided
-```
+[![Playstore](https://img.shields.io/badge/Download%20From%20Playstore-448045.svg?logo=google&style=for-the-badge)](https://play.google.com/store/apps/details?id=com.pcandroiddev.expensemanager)
 
-## Testing locally with the SAM CLI
+## Features
 
-From the project root folder - where the `template.yml` file is located - start the API with the SAM CLI.
+- **[INCOME AND EXPENSE TRACKING]** Spendwise allows users to easily record their income and expenses, helping them stay on top of their finances.
+- **[BUDGET MANAGEMENT]** Users can set a budget and track their spending in various categories, ensuring they stay within their financial goals.
+- **[PIE CHART ANALYTICS]** The app provides a visual representation of spending habits through a pie chart, allowing users to see where they are spending the most.
+- **[DOWNLOAD STATEMENTS]** Users can generate and download statements of their income and expense records within a specified date range, making it easy to review and analyze their financial data.
 
-```bash
-$ sam local start-api
+## 🛠 App Built With
 
-...
-Mounting com.amazonaws.serverless.archetypes.StreamLambdaHandler::handleRequest (java11) at http://127.0.0.1:3000/{proxy+} [OPTIONS GET HEAD POST PUT DELETE PATCH]
-...
-```
+|  Feature   | Tech |
+|----------------	|------------------------------	|
+| <img height="20" src="https://3.bp.blogspot.com/-VVp3WvJvl84/X0Vu6EjYqDI/AAAAAAAAPjU/ZOMKiUlgfg8ok8DY8Hc-ocOvGdB0z86AgCLcBGAsYHQ/s1600/jetpack%2Bcompose%2Bicon_RGB.png">    UI Framework  | [Jetpack Compose](https://www.jetbrains.com/lp/compose-multiplatform/)         |                        |
+| 💉 DI                | [Dagger-Hilt](https://developer.android.com/training/dependency-injection/hilt-android)                        |             |
+| 🌐 Networking        | [Retrofit](https://github.com/square/retrofit)                   |
+| :compass: Navigation       |  [Compose Destinations Navigation](https://developer.android.com/jetpack/compose/navigation) |
+| :thread: Asynchronous Work     |  [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)|
+| <img height="20" src="https://res.cloudinary.com/prathmeshc/image/upload/v1697512587/1611674_mufi3x.png">    Authentication  | [Firebase](https://firebase.google.com/)         |                        |
+| <img height="20" src="https://res.cloudinary.com/prathmeshc/image/upload/v1697513029/Screenshot_2023-10-16_at_11.23.44_PM_k3slwi.png">     Push Notification     |  [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging)|
 
-Using a new shell, you can send a test ping request to your API:
+## 🛠 Backend Built With
 
-```bash
-$ curl -s http://127.0.0.1:3000/ping | python -m json.tool
+|  Feature   | Tech |
+|----------------	|------------------------------	|
+| <img height="20" src="https://res.cloudinary.com/prathmeshc/image/upload/v1697513270/Screenshot_2023-10-16_at_11.27.47_PM_fgzr68.png">    API        | [Spring Boot](https://spring.io/projects/spring-boot)                   |
+| 💾 Database     |  [MongoDB](https://www.mongodb.com/)|
 
-{
-    "pong": "Hello, World!"
-}
-``` 
+↗️ [Checkout Android App](https://github.com/prathmeshkc/Spendwise)\
+↗️ [Checkout iOS App](https://github.com/prathmeshkc/Spendwise-iOS-dev)\
+↗️ [Checkout Backend](https://github.com/prathmeshkc/SpendwiseBackend)
 
-## Deploying to AWS
-To deploy the application in your AWS account, you can use the SAM CLI's guided deployment process and follow the instructions on the screen
+## :iphone: Screenshots
 
-```
-$ sam deploy --guided
-```
+<table style="width:100%">
+  <tr>
+    <th>Home Screen</th>
+    <th>All Transaction Screen</th> 
+    <th>Details Screen</th> 
+  </tr>
+  <tr>
+    <td><img src = "https://res.cloudinary.com/prathmeshc/image/upload/v1697514741/DashboardScreen_skj6ca.png" width=240/></td> 
+    <td><img src = "https://res.cloudinary.com/prathmeshc/image/upload/v1697514740/AllTransactionScreen_rlbptk.png" width=240/></td>
+    <td><img src = "https://res.cloudinary.com/prathmeshc/image/upload/v1697514742/DetailsScreen_vft3pp.png" width=240/></td>
+  </tr>
 
-Once the deployment is completed, the SAM CLI will print out the stack's outputs, including the new application URL. You can use `curl` or a web browser to make a call to the URL
+  <tr>
+    <th>Add Transaction</th>
+    <th>Insights</th> 
+    <th>Push Notification Sample</th> 
+  </tr>
+  <tr>
+    <td><img src = "https://res.cloudinary.com/prathmeshc/image/upload/v1697514740/AddEditTransactionScreen_douktk.png" width=240/></td> 
+    <td><img src = "https://res.cloudinary.com/prathmeshc/image/upload/v1697514741/Chart_bg6dmi.png" width=240/></td>
+    <td><img src = "https://res.cloudinary.com/prathmeshc/image/upload/v1697515488/IMG-20230911-WA0008_q6cmu6.jpg" width=240/></td>
+  </tr>
+  <tr>
+    <th>Register Screen</th>
+    <th>Login Screen</th> 
+  </tr>
+  <tr>
+    <td><img src = "https://res.cloudinary.com/prathmeshc/image/upload/v1697514742/RegisterScreen_co7ilh.png" width=240/></td> 
+    <td><img src = "https://res.cloudinary.com/prathmeshc/image/upload/v1697514742/LoginScreen_j3tevw.png" width=240/></td>
+  </tr>
+</table>
+<br>
 
-```
-...
--------------------------------------------------------------------------------------------------------------
-OutputKey-Description                        OutputValue
--------------------------------------------------------------------------------------------------------------
-ExpenseManagerBackendApi - URL for application            https://xxxxxxxxxx.execute-api.us-west-2.amazonaws.com/Prod/pets
--------------------------------------------------------------------------------------------------------------
-```
+## 🏗️ Spendwise Architecture Diagram
 
-Copy the `OutputValue` into a browser or use curl to test your first request:
+![Spendwise Architecture Diagram](https://res.cloudinary.com/prathmeshc/image/upload/v1697513981/ExpenseManager_HLD_faugzn.png)
 
-```bash
-$ curl -s https://xxxxxxx.execute-api.us-west-2.amazonaws.com/Prod/ping | python -m json.tool
+## 🏗️ Spendwise Push Notification Architecture Diagram
+![Spendwise Push Notification Architecture Diagram](https://res.cloudinary.com/prathmeshc/image/upload/v1697513981/Push_Notification_HLD_ef5r6m.png)
 
-{
-    "pong": "Hello, World!"
-}
-```
+
+
+## Authors
+
+- [@prathmeshkc](https://github.com/prathmeshkc)
+
